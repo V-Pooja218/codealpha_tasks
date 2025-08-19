@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🏃‍♀️ Fitness Tracker</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 30px;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #e0f7fa, #b2ebf2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      color: #00796b;
+      margin-bottom: 20px;
+    }
+
+    .tracker {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      width: 400px;
+      max-width: 90%;
+    }
+
+    .tracker input, .tracker select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    .tracker button {
+      background: #00796b;
+      color: white;
+      border: none;
+      padding: 10px;
+      width: 100%;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .tracker button:hover {
+      background: #004d40;
+    }
+
+    .log {
+      margin-top: 20px;
+    }
+
+    .entry {
+      background: #e0f2f1;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+    }
+
+    .entry strong {
+      color: #004d40;
+    }
+
+    .total {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #00796b;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🏋️ Fitness Tracker</h1>
+  <div class="tracker">
+    <select id="workout-type">
+      <option value="">-- Select Workout Type --</option>
+      <option value="Running">Running</option>
+      <option value="Cycling">Cycling</option>
+      <option value="Yoga">Yoga</option>
+      <option value="Weight Training">Weight Training</option>
+      <option value="Swimming">Swimming</option>
+    </select>
+
+    <input type="number" id="duration" placeholder="Duration (minutes)">
+    <input type="number" id="calories" placeholder="Calories Burned">
+
+    <button onclick="addWorkout()">Add Workout</button>
+
+    <div class="log" id="log"></div>
+    <div class="total" id="total-calories"></div>
+  </div>
+
+  <script>
+    const logEl = document.getElementById("log");
+    const totalEl = document.getElementById("total-calories");
+
+    let workouts = [];
+
+    function addWorkout() {
+      const type = document.getElementById("workout-type").value;
+      const duration = parseInt(document.getElementById("duration").value);
+      const calories = parseInt(document.getElementById("calories").value);
+
+      if (!type || !duration || !calories) {
+        alert("Please fill in all fields.");
+        return;
+      }
+
+      const workout = {
+        type,
+        duration,
+        calories,
+        date: new Date().toLocaleString()
+      };
+
+      workouts.push(workout);
+      updateLog();
+    }
+
+    function updateLog() {
+      logEl.innerHTML = "";
+      let total = 0;
+
+      workouts.slice().reverse().forEach(w => {
+        total += w.calories;
+        const div = document.createElement("div");
+        div.className = "entry";
+        div.innerHTML = `
+          <strong>${w.type}</strong> - ${w.duration} mins, ${w.calories} kcal
+          <br><small>${w.date}</small>
+        `;
+        logEl.appendChild(div);
+      });
+
+      totalEl.textContent = `🔥 Total Calories Burned: ${total} k
+    }
+      </body>
+      </html>
