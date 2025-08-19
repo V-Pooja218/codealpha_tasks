@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🌟 Random Quote Generator</title>
+  <style>
+    :root {
+      --primary: #4a90e2;
+      --light: #ffffff;
+      --dark: #333333;
+    }
+
+    body {
+      background: linear-gradient(to bottom right, #e3f2fd, #bbdefb);
+      font-family: 'Segoe UI', sans-serif;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .quote-box {
+      background-color: var(--light);
+      color: var(--dark);
+      padding: 30px 40px;
+      border-radius: 15px;
+      width: 400px;
+      max-width: 90%;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: 0.3s ease-in-out;
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: scale(0.95);}
+      to {opacity: 1; transform: scale(1);}
+    }
+
+    .quote-text {
+      font-size: 20px;
+      font-style: italic;
+      margin-bottom: 15px;
+      color: #222;
+    }
+
+    .quote-author {
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #555;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      font-size: 14px;
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #357abd;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="quote-box">
+    <div class="quote-text" id="quote">Loading...</div>
+    <div class="quote-author" id="author"></div>
+    <button class="btn" onclick="generateQuote()">New Quote</button>
+  </div>
+
+  <script>
+    const quotes = [
+      { text: "The best way to get started is to quit talking and begin doing.", author: "Walt Disney" },
+      { text: "Success is not the key to happiness. Happiness is the key to success.", author: "Albert Schweitzer" },
+      { text: "Life is what happens when you're busy making other plans.", author: "John Lennon" },
+      { text: "Don’t let yesterday take up too much of today.", author: "Will Rogers" },
+      { text: "If you want to lift yourself up, lift up someone else.", author: "Booker T. Washington" },
+      { text: "The future belongs to those who believe in the beauty of their dreams.", author: "Eleanor Roosevelt" },
+      { text: "Believe you can and you're halfway there.", author: "Theodore Roosevelt" },
+      { text: "You miss 100% of the shots you don’t take.", author: "Wayne Gretzky" },
+      { text: "The only limit to our realization of tomorrow is our doubts of today.", author: "Franklin D. Roosevelt" },
+      { text: "Your time is limited, so don't waste it living someone else's life.", author: "Steve Jobs" }
+    ];
+
+    function generateQuote() {
+      const index = Math.floor(Math.random() * quotes.length);
+      const quote = quotes[index];
+      document.getElementById("quote").textContent = `"${quote.text}"`;
+      document.getElementById("author").textContent = `— ${quote.author}`;
+    }
+
+    // Load a quote on page load
+    window.onload = generateQuote;
+  </script>
+
+</body>
+</html>
